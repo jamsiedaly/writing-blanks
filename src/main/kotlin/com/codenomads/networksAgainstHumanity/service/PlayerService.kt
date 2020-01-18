@@ -41,7 +41,7 @@ class PlayerService(@Autowired val playerRepository: PlayerRepository, @Autowire
         playerRepository.save(updatedPlayer)
     }
 
-    fun getAllPlayersInGame(player: Player): MutableList<Player> {
+    fun getAllPlayersInGame(player: Player): List<Player> {
         val game = getPlayersGame(player)
         return game?.players ?: mutableListOf()
     }

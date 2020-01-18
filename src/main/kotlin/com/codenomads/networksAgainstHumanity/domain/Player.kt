@@ -13,5 +13,9 @@ data class Player(
         @Column
         val gameId: Long?,
         @Column
-        var score: Long = 0
+        var score: Int = 0,
+        @Column
+        var votes: Int = 0,
+        @Column
+        var voted: Boolean = false
 )

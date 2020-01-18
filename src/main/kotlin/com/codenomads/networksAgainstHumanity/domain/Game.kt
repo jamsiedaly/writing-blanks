@@ -10,5 +10,7 @@ data class Game(
     @Column
     val name: String,
     @OneToMany(targetEntity= Player::class, fetch = FetchType.EAGER)
-    val players: MutableList<Player>
+    val players: List<Player>,
+    @OneToMany(targetEntity= Round::class)
+    val rounds: List<Round> = mutableListOf()
 )

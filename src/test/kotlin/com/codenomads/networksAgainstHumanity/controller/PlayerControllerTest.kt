@@ -6,6 +6,7 @@ import com.codenomads.networksAgainstHumanity.domain.Player
 import com.codenomads.networksAgainstHumanity.repository.GameRepository
 import com.codenomads.networksAgainstHumanity.repository.PlayerRepository
 import com.google.gson.Gson
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -79,5 +80,11 @@ internal class PlayerControllerTest {
         val playerDtos : List<*> = gson.fromJson(json, Array<PlayerDto>::class.java).toList()
         assert(playerDtos.contains(PlayerDto(player.name)))
         assert(playerDtos.contains(PlayerDto(player2.name)))
+    }
+
+    @AfterEach
+    fun tearDown() {
+        gameRepository.deleteAll()
+        playerRepository.deleteAll()
     }
 }

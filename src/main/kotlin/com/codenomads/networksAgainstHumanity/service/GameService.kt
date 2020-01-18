@@ -2,6 +2,7 @@ package com.codenomads.networksAgainstHumanity.service
 
 import com.codenomads.networksAgainstHumanity.domain.Game
 import com.codenomads.networksAgainstHumanity.domain.Player
+import com.codenomads.networksAgainstHumanity.domain.Round
 import com.codenomads.networksAgainstHumanity.repository.GameRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -24,9 +25,10 @@ class GameService(
     }
 
     fun addPlayerToGame(player: Player, game: Game) {
-        game.players.add(player)
-        gameRepository.save(game)
-        playerService.setPlayersGame(player, game)
+        val players = game.players + player
+        val updatedGame = game.copy(players = players)
+        gameRepository.save(updatedGame)
+        playerService.setPlayersGame(player, updatedGame)
     }
 
     fun getPlayersGame(player: Player): Game? = gameRepository.findAll().find { game ->
@@ -38,13 +40,20 @@ class GameService(
     fun quit(player: Player) {
         val game = getPlayersGame(player)
         if (game != null) {
-            game.players.remove(player)
-            if (game.players.size == 0) {
+            val players = game.players - player
+            if (players.isEmpty()) {
                 gameRepository.delete(game)
             } else {
-                gameRepository.save(game)
+                val updatedGame = game.copy(players = players)
+                gameRepository.save(updatedGame)
             }
         }
         playerService.quit(player)
+    }
+
+    fun addRoundToGame(game: Game, round: Round) {
+        val updatedRounds = game.rounds + round
+        val updateGame = game.copy(rounds = updatedRounds)
+        gameRepository.save(updateGame)
     }
 }
