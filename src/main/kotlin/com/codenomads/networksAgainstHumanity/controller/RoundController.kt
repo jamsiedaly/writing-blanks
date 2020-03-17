@@ -4,10 +4,10 @@ import com.codenomads.networksAgainstHumanity.service.GameService
 import com.codenomads.networksAgainstHumanity.service.RoundService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import kotlin.math.round
 
 @RestController
 @RequestMapping("/game/{gameName}/round")
+@CrossOrigin(origins = ["http://localhost:4200"])
 class RoundController(@Autowired val roundService: RoundService, @Autowired val gameService: GameService) {
 
     @PostMapping

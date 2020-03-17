@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/game")
+@CrossOrigin(origins = ["http://localhost:4200"])
 class GameController(
         @Autowired val gameService: GameService,
         @Autowired val playerService: PlayerService
 ) {
+
+    @GetMapping("/")
+    fun index(): String {
+        return "Welcome to cards against humanity"
+    }
 
     @PostMapping("/")
     fun createGame(@RequestBody gameName: String, @RequestHeader("token") playerToken: Long): Game {

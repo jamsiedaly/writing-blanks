@@ -1,13 +1,9 @@
 package com.codenomads.networksAgainstHumanity
 
-import com.codenomads.networksAgainstHumanity.repository.PlayerRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.spi.DocumentationType

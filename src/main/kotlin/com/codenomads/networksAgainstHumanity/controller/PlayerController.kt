@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("player")
+@CrossOrigin(origins = ["http://localhost:4200"])
 class PlayerController(@Autowired val playerService: PlayerService) {
 
     @PostMapping("/")
